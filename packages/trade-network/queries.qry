@@ -18,23 +18,9 @@ query selectSecurities {
       SELECT org.example.trading.Security
 }
 
-query selectSecuritiesByExchange {
-  description: "Select all securities based on their main exchange"
-  statement:
-      SELECT org.example.trading.Security
-          WHERE (mainExchange==_$exchange)
-}
-
 query selectSecuritiesByOwner {
   description: "Select all securities based on their owner"
   statement:
       SELECT org.example.trading.Security
           WHERE (owner == _$owner)
-}
-
-query selectSecuritiesWithHighQuantity {
-  description: "Select securities based on quantity"
-  statement:
-      SELECT org.example.trading.Security
-          WHERE (quantity > 60)
 }

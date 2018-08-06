@@ -156,9 +156,6 @@ describe('Security Trading', () => {
             results.length.should.equal(1);
             results[0].getIdentifier().should.equal('EMA');
 
-            // submit the remove transaction
-            const remove = factory.newTransaction(namespace, 'RemoveHighQuantitySecurities');
-            await businessNetworkConnection.submitTransaction(remove);
 
             // use a query
             results = await businessNetworkConnection.query('selectSecurities');

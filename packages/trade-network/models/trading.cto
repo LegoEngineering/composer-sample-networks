@@ -39,9 +39,6 @@ event TradeNotification {
   --> Security security
 }
 
-transaction RemoveHighQuantitySecurities {
-}
-
 event RemoveNotification {
   --> Security security
 }

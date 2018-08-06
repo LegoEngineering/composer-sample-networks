@@ -13,10 +13,6 @@
       "./mixins"
     ]
   },
-  "System": {
-    "dataSource": "composer",
-    "public": true
-  },
   "PingResponse": {
     "dataSource": "composer",
     "public": false
@@ -33,8 +29,4 @@
     "dataSource": "composer",
     "public": true
   },
-  "RemoveHighQuantitySecurities": {
-    "dataSource": "composer",
-    "public": true
-  }
 }
