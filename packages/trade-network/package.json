@@ -4,7 +4,7 @@
   },
   "name": "trade-network",
   "version": "0.2.6",
-  "description": "Commodities Trading Business Network",
+  "description": "Securities Trading Business Network",
   "networkImage": "https://hyperledger.github.io/composer-sample-networks/packages/trade-network/networkimage.svg",
   "networkImageanimated": "https://hyperledger.github.io/composer-sample-networks/packages/trade-network/networkimageanimated.svg",
   "scripts": {
@@ -23,7 +23,7 @@
     "url": "https://github.com/hyperledger/composer-sample-networks.git"
   },
   "keywords": [
-    "commodities",
+    "securities",
     "trading",
     "composer",
     "composer-network"

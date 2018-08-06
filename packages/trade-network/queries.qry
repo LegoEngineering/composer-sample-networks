@@ -12,29 +12,29 @@
  * limitations under the License.
  */
 
-query selectCommodities {
-  description: "Select all commodities"
+query selectSecurities {
+  description: "Select all securities"
   statement:
-      SELECT org.example.trading.Commodity
+      SELECT org.example.trading.Security
 }
 
-query selectCommoditiesByExchange {
-  description: "Select all commodities based on their main exchange"
+query selectSecuritiesByExchange {
+  description: "Select all securities based on their main exchange"
   statement:
-      SELECT org.example.trading.Commodity
+      SELECT org.example.trading.Security
           WHERE (mainExchange==_$exchange)
 }
 
-query selectCommoditiesByOwner {
-  description: "Select all commodities based on their owner"
+query selectSecuritiesByOwner {
+  description: "Select all securities based on their owner"
   statement:
-      SELECT org.example.trading.Commodity
+      SELECT org.example.trading.Security
           WHERE (owner == _$owner)
 }
 
-query selectCommoditiesWithHighQuantity {
-  description: "Select commodities based on quantity"
+query selectSecuritiesWithHighQuantity {
+  description: "Select securities based on quantity"
   statement:
-      SELECT org.example.trading.Commodity
+      SELECT org.example.trading.Security
           WHERE (quantity > 60)
 }

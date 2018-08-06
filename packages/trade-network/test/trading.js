@@ -23,7 +23,7 @@ require('chai').should();
 
 const namespace = 'org.example.trading';
 
-describe('Commodity Trading', () => {
+describe('Security Trading', () => {
     // In-memory card store for testing so cards are not persisted to the file system
     const cardStore = require('composer-common').NetworkCardStoreManager.getCardStore( { type: 'composer-wallet-inmemory' } );
     let adminConnection;
@@ -83,9 +83,9 @@ describe('Commodity Trading', () => {
         await businessNetworkConnection.connect(adminCardName);
     });
 
-    describe('#tradeCommodity', () => {
+    describe('#tradeSecurity', () => {
 
-        it('should be able to trade a commodity', async () => {
+        it('should be able to trade a security', async () => {
             const factory = businessNetworkConnection.getBusinessNetwork().getFactory();
 
             // create the traders
@@ -97,38 +97,38 @@ describe('Commodity Trading', () => {
             simon.firstName = 'Simon';
             simon.lastName = 'Stone';
 
-            // create the commodity
-            const commodity = factory.newResource(namespace, 'Commodity', 'EMA');
-            commodity.description = 'Corn';
-            commodity.mainExchange = 'Euronext';
-            commodity.quantity = 100;
-            commodity.owner = factory.newRelationship(namespace, 'Trader', dan.$identifier);
+            // create the security
+            const security = factory.newResource(namespace, 'Security', 'EMA');
+            security.description = 'Corn';
+            security.mainExchange = 'Euronext';
+            security.quantity = 100;
+            security.owner = factory.newRelationship(namespace, 'Trader', dan.$identifier);
 
             // create the trade transaction
             const trade = factory.newTransaction(namespace, 'Trade');
             trade.newOwner = factory.newRelationship(namespace, 'Trader', simon.$identifier);
-            trade.commodity = factory.newRelationship(namespace, 'Commodity', commodity.$identifier);
+            trade.security = factory.newRelationship(namespace, 'Security', security.$identifier);
 
-            // the owner should of the commodity should be dan
-            commodity.owner.$identifier.should.equal(dan.$identifier);
+            // the owner should of the security should be dan
+            security.owner.$identifier.should.equal(dan.$identifier);
 
-            // create the second commodity
-            const commodity2 = factory.newResource(namespace, 'Commodity', 'XYZ');
-            commodity2.description = 'Soya';
-            commodity2.mainExchange = 'Chicago';
-            commodity2.quantity = 50;
-            commodity2.owner = factory.newRelationship(namespace, 'Trader', dan.$identifier);
+            // create the second security
+            const security2 = factory.newResource(namespace, 'Security', 'XYZ');
+            security2.description = 'Soya';
+            security2.mainExchange = 'Chicago';
+            security2.quantity = 50;
+            security2.owner = factory.newRelationship(namespace, 'Trader', dan.$identifier);
 
             // register for events from the business network
             businessNetworkConnection.on('event', (event) => {
-                console.log( 'Received event: ' + event.getFullyQualifiedIdentifier() + ' for commodity ' + event.commodity.getIdentifier() );
+                console.log( 'Received event: ' + event.getFullyQualifiedIdentifier() + ' for security ' + event.security.getIdentifier() );
             });
 
             // Get the asset registry.
-            const assetRegistry = await businessNetworkConnection.getAssetRegistry(namespace + '.Commodity');
+            const assetRegistry = await businessNetworkConnection.getAssetRegistry(namespace + '.Security');
 
-            // add the commodities to the asset registry.
-            await assetRegistry.addAll([commodity,commodity2]);
+            // add the securities to the asset registry.
+            await assetRegistry.addAll([security,security2]);
 
             // add the traders
             const participantRegistry = await businessNetworkConnection.getParticipantRegistry(namespace + '.Trader');
@@ -137,33 +137,33 @@ describe('Commodity Trading', () => {
             // submit the transaction
             await businessNetworkConnection.submitTransaction(trade);
 
-            // re-get the commodity
-            const newCommodity = await assetRegistry.get(commodity.$identifier);
-            // the owner of the commodity should now be simon
-            newCommodity.owner.$identifier.should.equal(simon.$identifier);
+            // re-get the security
+            const newSecurity = await assetRegistry.get(security.$identifier);
+            // the owner of the security should now be simon
+            newSecurity.owner.$identifier.should.equal(simon.$identifier);
 
             // use a query
-            let results = await businessNetworkConnection.query('selectCommoditiesByExchange', {exchange : 'Euronext'});
+            let results = await businessNetworkConnection.query('selectSecuritiesByExchange', {exchange : 'Euronext'});
 
             // check results
             results.length.should.equal(1);
             results[0].getIdentifier().should.equal('EMA');
 
             // use another query
-            results = await businessNetworkConnection.query('selectCommoditiesByOwner', {owner : 'resource:' + simon.getFullyQualifiedIdentifier()});
+            results = await businessNetworkConnection.query('selectSecuritiesByOwner', {owner : 'resource:' + simon.getFullyQualifiedIdentifier()});
 
             //  check results
             results.length.should.equal(1);
             results[0].getIdentifier().should.equal('EMA');
 
             // submit the remove transaction
-            const remove = factory.newTransaction(namespace, 'RemoveHighQuantityCommodities');
+            const remove = factory.newTransaction(namespace, 'RemoveHighQuantitySecurities');
             await businessNetworkConnection.submitTransaction(remove);
 
             // use a query
-            results = await businessNetworkConnection.query('selectCommodities');
+            results = await businessNetworkConnection.query('selectSecurities');
 
-            // check results, should only have 1 commodity left
+            // check results, should only have 1 security left
             results.length.should.equal(1);
             results[0].getIdentifier().should.equal('XYZ');
         });

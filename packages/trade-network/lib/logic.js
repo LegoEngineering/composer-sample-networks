@@ -15,40 +15,40 @@
 /* global getAssetRegistry getFactory emit query */
 
 /**
- * Track the trade of a commodity from one trader to another
+ * Track the trade of a security from one trader to another
  * @param {org.example.trading.Trade} trade - the trade to be processed
  * @transaction
  */
-async function tradeCommodity(trade) { // eslint-disable-line no-unused-vars
+async function tradeSecurity(trade) { // eslint-disable-line no-unused-vars
 
-    // set the new owner of the commodity
-    trade.commodity.owner = trade.newOwner;
-    const assetRegistry = await getAssetRegistry('org.example.trading.Commodity');
+    // set the new owner of the security
+    trade.security.owner = trade.newOwner;
+    const assetRegistry = await getAssetRegistry('org.example.trading.Security');
 
     // emit a notification that a trade has occurred
     const tradeNotification = getFactory().newEvent('org.example.trading', 'TradeNotification');
-    tradeNotification.commodity = trade.commodity;
+    tradeNotification.security = trade.security;
     emit(tradeNotification);
 
-    // persist the state of the commodity
-    await assetRegistry.update(trade.commodity);
+    // persist the state of the security
+    await assetRegistry.update(trade.security);
 }
 
 /**
- * Remove all high volume commodities
- * @param {org.example.trading.RemoveHighQuantityCommodities} remove - the remove to be processed
+ * Remove all high volume securities
+ * @param {org.example.trading.RemoveHighQuantitySecurities} remove - the remove to be processed
  * @transaction
  */
-async function removeHighQuantityCommodities(remove) { // eslint-disable-line no-unused-vars
+async function removeHighQuantitySecurities(remove) { // eslint-disable-line no-unused-vars
 
-    const assetRegistry = await getAssetRegistry('org.example.trading.Commodity');
-    const results = await query('selectCommoditiesWithHighQuantity');
+    const assetRegistry = await getAssetRegistry('org.example.trading.Security');
+    const results = await query('selectSecuritiesWithHighQuantity');
 
     // since all registry requests have to be serialized anyway, there is no benefit to calling Promise.all
     // on an array of promises
     results.forEach(async trade => {
         const removeNotification = getFactory().newEvent('org.example.trading', 'RemoveNotification');
-        removeNotification.commodity = trade;
+        removeNotification.security = trade;
         emit(removeNotification);
         await assetRegistry.remove(trade);
     });

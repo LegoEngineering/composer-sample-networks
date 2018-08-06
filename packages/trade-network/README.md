@@ -1,6 +1,6 @@
 # Trade Network
 
-> This Business Network illustrates commodity trading.
+> This Business Network illustrates security trading.
 
 This business network defines:
 
@@ -8,7 +8,7 @@ This business network defines:
 `Trader`
 
 **Asset**
-`Commodity`
+`Security`
 
 **Transaction(s)**
 `Transaction`
@@ -38,13 +38,13 @@ Create two `Trader` participants:
 }
 ```
 
-Create a `Commodity` asset:
+Create a `Security` asset:
 
 ```
 {
-  "$class": "org.example.trading.Commodity",
+  "$class": "org.example.trading.Security",
   "tradingSymbol": "ABC",
-  "description": "Test commodity",
+  "description": "Test security",
   "mainExchange": "Euronext",
   "quantity": 72.297,
   "owner": "resource:org.example.trading.Trader#TRADER1"
@@ -56,12 +56,12 @@ Submit a `Trade` transaction:
 ```
 {
   "$class": "org.example.trading.Trade",
-  "commodity": "resource:org.example.trading.Commodity#ABC",
+  "security": "resource:org.example.trading.Security#ABC",
   "newOwner": "resource:org.example.trading.Trader#TRADER2"
 }
 ```
 
-After submitting this transaction, you should now see the transaction in the transaction registry. As a result, the owner of the commodity `ABC` should now be owned `TRADER2` in the Asset Registry.
+After submitting this transaction, you should now see the transaction in the transaction registry. As a result, the owner of the security `ABC` should now be owned `TRADER2` in the Asset Registry.
 
 Congratulations!
 

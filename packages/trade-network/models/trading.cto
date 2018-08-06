@@ -12,11 +12,11 @@
  * limitations under the License.
  */
 /**
- * Commodity trading network
+ * Security trading network
  */
 namespace org.example.trading
 
-asset Commodity identified by tradingSymbol {
+asset Security identified by tradingSymbol {
   o String tradingSymbol
   o String description
   o String mainExchange
@@ -31,17 +31,17 @@ participant Trader identified by tradeId {
 }
 
 transaction Trade {
-  --> Commodity commodity
+  --> Security security
   --> Trader newOwner
 }
 
 event TradeNotification {
-  --> Commodity commodity
+  --> Security security
 }
 
-transaction RemoveHighQuantityCommodities {
+transaction RemoveHighQuantitySecurities {
 }
 
 event RemoveNotification {
-  --> Commodity commodity
+  --> Security security
 }
