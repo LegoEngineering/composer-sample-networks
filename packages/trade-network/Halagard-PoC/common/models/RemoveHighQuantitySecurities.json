@@ -1,0 +1,41 @@
+{
+  "name": "RemoveHighQuantitySecurities",
+  "description": "A transaction named RemoveHighQuantitySecurities",
+  "plural": "RemoveHighQuantitySecurities",
+  "base": "PersistedModel",
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true,
+    "composer": {
+      "type": "transaction",
+      "namespace": "org.example.trading",
+      "name": "RemoveHighQuantitySecurities",
+      "fqn": "org.example.trading.RemoveHighQuantitySecurities",
+      "abstract": false
+    }
+  },
+  "properties": {
+    "$class": {
+      "type": "string",
+      "default": "org.example.trading.RemoveHighQuantitySecurities",
+      "required": false,
+      "description": "The class identifier for this type"
+    },
+    "transactionId": {
+      "type": "string",
+      "id": true,
+      "description": "The instance identifier for this type",
+      "required": false,
+      "generated": true
+    },
+    "timestamp": {
+      "type": "date",
+      "required": false
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": [],
+  "forceId": true
+}

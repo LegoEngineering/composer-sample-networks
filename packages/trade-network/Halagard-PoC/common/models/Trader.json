@@ -1,0 +1,43 @@
+{
+  "name": "Trader",
+  "description": "A participant named Trader",
+  "plural": "Trader",
+  "base": "PersistedModel",
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true,
+    "composer": {
+      "type": "participant",
+      "namespace": "org.example.trading",
+      "name": "Trader",
+      "fqn": "org.example.trading.Trader",
+      "abstract": false
+    }
+  },
+  "properties": {
+    "$class": {
+      "type": "string",
+      "default": "org.example.trading.Trader",
+      "required": false,
+      "description": "The class identifier for this type"
+    },
+    "tradeId": {
+      "type": "string",
+      "id": true,
+      "description": "The instance identifier for this type",
+      "required": true
+    },
+    "firstName": {
+      "type": "string",
+      "required": true
+    },
+    "lastName": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": []
+}

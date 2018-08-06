@@ -1,0 +1,51 @@
+{
+  "name": "Trade",
+  "description": "A transaction named Trade",
+  "plural": "Trade",
+  "base": "PersistedModel",
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true,
+    "composer": {
+      "type": "transaction",
+      "namespace": "org.example.trading",
+      "name": "Trade",
+      "fqn": "org.example.trading.Trade",
+      "abstract": false
+    }
+  },
+  "properties": {
+    "$class": {
+      "type": "string",
+      "default": "org.example.trading.Trade",
+      "required": false,
+      "description": "The class identifier for this type"
+    },
+    "security": {
+      "type": "any",
+      "description": "The identifier of an instance of security",
+      "required": true
+    },
+    "newOwner": {
+      "type": "any",
+      "description": "The identifier of an instance of newOwner",
+      "required": true
+    },
+    "transactionId": {
+      "type": "string",
+      "id": true,
+      "description": "The instance identifier for this type",
+      "required": false,
+      "generated": true
+    },
+    "timestamp": {
+      "type": "date",
+      "required": false
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": [],
+  "forceId": true
+}

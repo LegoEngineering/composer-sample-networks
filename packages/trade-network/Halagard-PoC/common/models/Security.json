@@ -1,0 +1,52 @@
+{
+  "name": "Security",
+  "description": "An asset named Security",
+  "plural": "Security",
+  "base": "PersistedModel",
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true,
+    "composer": {
+      "type": "asset",
+      "namespace": "org.example.trading",
+      "name": "Security",
+      "fqn": "org.example.trading.Security",
+      "abstract": false
+    }
+  },
+  "properties": {
+    "$class": {
+      "type": "string",
+      "default": "org.example.trading.Security",
+      "required": false,
+      "description": "The class identifier for this type"
+    },
+    "tradingSymbol": {
+      "type": "string",
+      "id": true,
+      "description": "The instance identifier for this type",
+      "required": true
+    },
+    "description": {
+      "type": "string",
+      "required": true
+    },
+    "mainExchange": {
+      "type": "string",
+      "required": true
+    },
+    "quantity": {
+      "type": "number",
+      "required": true
+    },
+    "owner": {
+      "type": "any",
+      "description": "The identifier of an instance of owner",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": []
+}
