@@ -32,10 +32,10 @@ class Composer {
     } else if (model.settings.composer.type === 'concept') {
       whitelist = [];
     } else if (model.settings.composer.type === 'transaction') {
-      whitelist = ['create', 'find', 'findById', 'exists'];
+      whitelist = ['create', 'find'];
     } else {
-      whitelist = ['create', 'deleteById', 'replaceById',
-        'find', 'findById', 'exists'];
+      whitelist = ['create', 'deleteById',
+        'find'];
     }
     model.sharedClass.methods().forEach((method) => {
       const name = (method.isStatic ? '' : 'prototype.') + method.name;
